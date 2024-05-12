@@ -78,11 +78,11 @@ public enum FRItems {
     private final Integer burnTime;
     private Item item;
 
-    FRItems(String pathName, Supplier itemSupplier) {
+    FRItems(String pathName, Supplier<Item> itemSupplier) {
         this(pathName, itemSupplier, (Integer)null);
     }
 
-    FRItems(String pathName, Supplier itemSupplier, Integer burnTime) {
+    FRItems(String pathName, Supplier<Item> itemSupplier, Integer burnTime) {
         this.pathName = pathName;
         this.itemSupplier = itemSupplier;
         this.burnTime = burnTime;
@@ -106,7 +106,7 @@ public enum FRItems {
 
     public Item get() {
         if (this.item == null) {
-            this.item = (Item)this.itemSupplier.get();
+            this.item = this.itemSupplier.get();
         }
 
         return this.item;

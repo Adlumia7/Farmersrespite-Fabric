@@ -47,7 +47,7 @@ public enum FRBlocks {
 
     //Food
     COFFEE_CAKE("coffee_cake", () -> new CoffeeCakeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).sound(SoundType.WOOL))),
-    ROSE_HIP_PIE("rose_hip_pie", () -> new PieBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), FRItems.ROSE_HIP_PIE_SLICE.itemSupplier)),
+    ROSE_HIP_PIE("rose_hip_pie", () -> new PieBlock(Block.Properties.copy(Blocks.CAKE), () -> FRItems.ROSE_HIP_PIE_SLICE.get())),
     CANDLE_COFFEE_CAKE("candle_coffee_cake", () -> new CoffeeCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).sound(SoundType.WOOL).lightLevel(litBlockEmission(3)))),
     WHITE_CANDLE_COFFEE_CAKE("white_candle_coffee_cake", () -> new CoffeeCandleCakeBlock(Blocks.WHITE_CANDLE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).sound(SoundType.WOOL).lightLevel(litBlockEmission(3)))),
     ORANGE_CANDLE_COFFEE_CAKE("orange_candle_coffee_cake", () -> new CoffeeCandleCakeBlock(Blocks.ORANGE_CANDLE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.5F).sound(SoundType.WOOL).lightLevel(litBlockEmission(3)))),
@@ -89,15 +89,15 @@ public enum FRBlocks {
         return flammableRate != null && flammableRate.getBurnChance() > 0 && flammableRate.getSpreadChance() > 0;
     }
 
-    FRBlocks(String pathName, Supplier blockSupplier) {
+    FRBlocks(String pathName, Supplier<Block> blockSupplier) {
         this(pathName, blockSupplier, false, new FlammableBlockRegistry.Entry(0, 0));
     }
 
-    FRBlocks(String pathName, Supplier blockSupplier, boolean isCutout) {
+    FRBlocks(String pathName, Supplier<Block> blockSupplier, boolean isCutout) {
         this(pathName, blockSupplier, isCutout, new FlammableBlockRegistry.Entry(0, 0));
     }
 
-    FRBlocks(String pathName, Supplier blockSupplier, boolean isCutout, FlammableBlockRegistry.Entry flammableRate) {
+    FRBlocks(String pathName, Supplier<Block> blockSupplier, boolean isCutout, FlammableBlockRegistry.Entry flammableRate) {
         this.pathName = pathName;
         this.blockSupplier = blockSupplier;
         this.flammableRate = flammableRate;
