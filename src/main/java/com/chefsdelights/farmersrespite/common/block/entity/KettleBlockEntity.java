@@ -448,7 +448,7 @@ public class KettleBlockEntity extends SyncedBlockEntity implements MenuProvider
     }
 
     public boolean isContainerValid(ItemStack containerItem) {
-        if (containerItem.isEmpty()) {
+        if (containerItem.isEmpty() || this.getMeal().isEmpty()) {
             return false;
         } else {
             return !this.mealContainer.isEmpty() ? ItemStack.isSameItem(this.mealContainer, containerItem) : ItemStack.isSameItem(new ItemStack(this.getMeal().getItem().getCraftingRemainingItem()), containerItem);
